@@ -2,14 +2,14 @@
 # -*- coding: utf-8 -*-
 
 
-### This program uses BLAST+ (available at 
-### ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/) 
-### and the MySQL database, for a reciprocal blast analysis of 
-### multiple genome sequences. A more extensive description of 
-### the functionality of the program can be found at 
-### http://matstopel.se/notebook/Ortologous-sequences-from-NGS-data.
+###   This program uses BLAST+ (available at 
+###   ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/) 
+###   and the MySQL database, for a reciprocal blast analysis of 
+###   multiple genome sequences. A more extensive description of 
+###   the functionality of the program can be found at 
+###   http://matstopel.se/notebook/Ortologous-sequences-from-NGS-data.
 
-###   Copyright (C) 2011 Mats Töpel.
+###   Copyright (C) 2012 Mats Töpel.
 ###
 ###   Citation: If you use this version of the program, please cite;
 ###   Mats Töpel (2012) Open Laboratory Notebook. www.matstopel.se
