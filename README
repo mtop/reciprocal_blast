@@ -1,0 +1,7 @@
+This program uses BLAST+ (available at 
+ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/) 
+and the MySQL database, for a reciprocal blast analysis of 
+multiple genome sequences. A more extensive description of 
+the functionality of the program can be found at 
+http://matstopel.se/notebook/Ortologous-sequences-from-NGS-data.
+
