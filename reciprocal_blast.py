@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 
 ### This program uses BLAST+ (available at 
 ### ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/) 
@@ -6,6 +8,22 @@
 ### multiple genome sequences. A more extensive description of 
 ### the functionality of the program can be found at 
 ### http://matstopel.se/notebook/Ortologous-sequences-from-NGS-data.
+
+###   Copyright (C) 2011 Mats Töpel.
+###
+###   Citation: If you use this version of the program, please cite;
+###   Mats Töpel (2012) Open Laboratory Notebook. www.matstopel.se
+###
+###   This program is free software: you can redistribute it and/or modify
+###   it under the terms of the GNU General Public License as published by
+###   the Free Software Foundation, either version 3 of the License, or
+###   (at your option) any later version.
+###   
+###   This program is distributed in the hope that it will be useful,
+###   but WITHOUT ANY WARRANTY; without even the implied warranty of
+###   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+###   GNU General Public License for more details at
+###   http://www.gnu.org/licenses/.
 
 
 import ConfigParser
