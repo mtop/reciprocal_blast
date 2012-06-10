@@ -35,40 +35,18 @@ from Bio.Blast import NCBIXML
 from Bio import SeqIO
 import MySQLdb as mdb
 
-
-#####################################################
-### User definded stuff (should be turned in to a ###
-### commanline option or config file eventually)  ###
-#####################################################
-
-
 config = ConfigParser.RawConfigParser()
 config.read('reciprocal_blast.cfg')
 
-
-### NOT WORKING AT THE MOMENT
-#host = config.get('MySQL', 'host')
-#user_name = config.get('MySQL', 'user_name')
-#password = config.get('MySQL', 'password')
-#database_name = config.get('MySQL', 'database_name')
-#db_table_name = config.get('MySQL', 'db_table_name')
-#db_dir = config.get('MySQL', 'db_dir')
-
-
-### Details about the MySQL databas to store the results 
-### in and the genomes to use in the analysis
-host = 'localhost'
-user_name = 'mats'
-password = 'chloroplast'
-database_name = 'reciprocal_blast'
-db_table_name = 'plants'
-db_dir = '/home/mt258/db/Phytozome/all/'
-#db_dir = '/home/mt258/db/other_plant_genomes/all/'
-primary_taxon = config.get('Misc', 'primary_taxon')
-secondary_taxon = config.get('Misc', 'secondary_taxon')
+host = config.get('MySQL', 'host').replace("'", "")
+user_name = config.get('MySQL', 'user_name')
+password = config.get('MySQL', 'password').replace("'", "")
+database_name = config.get('MySQL', 'database_name').replace("'", "")
+db_table_name = config.get('MySQL', 'db_table_name').replace("'", "")
+db_dir = config.get('MySQL', 'db_dir').replace("'", "")
+primary_taxon = config.get('Misc', 'primary_taxon').replace("'", "")
+secondary_taxon = config.get('Misc', 'secondary_taxon').replace("'", "")
 genomes = [primary_taxon, secondary_taxon]
-
-
 
 ##########################################
 
@@ -252,28 +230,28 @@ def blast_db(directory, xml_file):
 
 ### Get data from xml file AND sequence from fasta file.
 def data_from_xml(file):
-	print '[--] Extracting data from %s.xml' % secondary_taxon.replace("'", "")
+	print '[--] Extracting data from %s.xml' % secondary_taxon
 	# Write e-values, id, def and sequence to database
-	write_to_db(file[:-4], '%s_id' % secondary_taxon.replace("'", ""), get_hit_id('%s.xml' % secondary_taxon.replace("'", "")))
-	# Chrashes when "&apos" occures in the hit_def string. Therefore, remove ' in fasta files before running "makeblasrdb"
-	write_to_db(file[:-4], '%s_def' % secondary_taxon.replace("'", ""), get_hit_def('%s.xml' % secondary_taxon.replace("'", "")))
+	write_to_db(file[:-4], '%s_id' % secondary_taxon, get_hit_id('%s.xml' % secondary_taxon))
+	# Chrashes when "&apos" occures in the hit_def string. Therefore, remove ' in fasta files before running "makeblastdb"
+	write_to_db(file[:-4], '%s_def' % secondary_taxon, get_hit_def('%s.xml' % secondary_taxon))
 #	write_to_db(file[:-4], '%s_eval' % secondary_taxon, get_evalue('%s.xml' % secondary_taxon))
-	write_to_db(file[:-4], '%s_seq' % secondary_taxon.replace("'", ""), get_sequences(secondary_taxon.replace("'", "")))
+	write_to_db(file[:-4], '%s_seq' % secondary_taxon, get_sequences(secondary_taxon))
 
 
 ### Create an entry defined by the query sequence file name.
 def create_entry(key):
-	con = mdb.connect(host, user_name, password, database_name) # Host, user name, password, database name
+	con = mdb.connect(host, user_name, password, database_name)
 	with con:
 		cur = con.cursor()
-		cur.execute("INSERT IGNORE INTO %s(query_seq) VALUES('%s')" % (db_table_name, key))     # Remove INGNORE later
+		cur.execute("INSERT IGNORE INTO %s(query_seq) VALUES('%s')" % (db_table_name, key))
 
 ### Write the result to a MySQL database.
 def write_to_db(key, column, value):
-	con = mdb.connect(host, user_name, password, database_name)	# Host, user name, password, database name
+	con = mdb.connect(host, user_name, password, database_name)
 	with con:
 		cur = con.cursor()
-		sql_string = "UPDATE %s SET %s = '%s' WHERE query_seq='%s'" % (db_table_name, column.replace("'", ""), value, key)
+		sql_string = "UPDATE %s SET %s = '%s' WHERE query_seq='%s'" % (db_table_name, column.replace("'", "    "), value, key)
 		cur.execute(sql_string)
 		print "Number of rows updated: %d" % cur.rowcount
 
