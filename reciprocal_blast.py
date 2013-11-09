@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/opt/python/bin/python2.7
 # -*- coding: utf-8 -*-
 
 
@@ -251,7 +251,7 @@ def write_to_db(key, column, value):
 	con = mdb.connect(host, user_name, password, database_name)
 	with con:
 		cur = con.cursor()
-		sql_string = "UPDATE %s SET %s = '%s' WHERE query_seq='%s'" % (db_table_name, column.replace("'", "    "), value, key)
+		sql_string = "UPDATE %s SET `%s` = '%s' WHERE query_seq='%s'" % (db_table_name, column.replace("'", "    "), value, key)
 		cur.execute(sql_string)
 		print "Number of rows updated: %d" % cur.rowcount
 
